@@ -34,8 +34,9 @@ export default function RootLayout({
       >
         <div>
           <Header />
+           {children}
         </div>
-        {children}
+       
       </body>
     </html>
     </ClerkProvider>
