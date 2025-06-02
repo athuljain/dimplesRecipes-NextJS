@@ -5,7 +5,7 @@ const Header=()=>{
     return(
              <header className='bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 shadow-md py-4'>
             <div className='container mx-auto flex justify-between items-center px-4'>
-                <Link  href='/'>
+                <Link legacyBehavior href='/'>
                     <a className='text-3xl font-bold text-white'>
                         Foodies - The Recipe Book
                     </a>
@@ -13,7 +13,7 @@ const Header=()=>{
                 <nav>
                     <ul className='flex space-x-8 items-center'>
                         <li>
-                            <Link href='/recipes/create-edit' >
+                            <Link href='/recipes/create-edit' legacyBehavior>
                                 <a className='items-center text-white hover:text-gray-300 transition-colors duration-300'>
                                     New Recipe
                                 </a>
