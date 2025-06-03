@@ -1,6 +1,8 @@
-import { join } from 'path';
-import {z} from 'zod'
+
+import {z, ZodIssue} from 'zod'
 import { prisma } from './lib/prisma';
+import { redirect } from 'next/navigation';
+
 
 const recipeSchema=z.object({
     title : z.string(),
@@ -9,7 +11,8 @@ const recipeSchema=z.object({
     steps:z.array(z.string()),
     image:z.string(),
     category:z.string(),
-    cookingTimeInMinutes:z.number().int().positive()
+    cookingTimeInMinutes:z.number().int().positive(),
+    authorId: z.string()
 })
 
 
@@ -22,7 +25,7 @@ export async function createRecipe(
     let recipe;
     try{
 
-        const patload={
+        const payload={
             title:formData.get("title"),
             description:formData.get("description"),
             image:formData.get("image"),
@@ -32,19 +35,30 @@ export async function createRecipe(
             steps,
             authorId
         }
-        const parseData= recipeSchema.safeParse(payload);
+        const parsedData= recipeSchema.safeParse(payload);
 
-        if(!parseData.success){
-            throw new Error(parseData.error.errors.map((err)=>error.message),join('\n'))
+    
+        if (! parsedData.success) {
+            // If parsing failed, throw an error with details of the validation errors
+            throw new Error(
+                parsedData.error.errors
+                    .map((err: ZodIssue) => err.message)
+                    .join('\n')
+            );
         }
 
-        recipe=await prisma. 
+        recipe=await prisma.recipe.create({
+            data:parsedData.data
+        }) 
 
 
 
-    }catch (error){
-        console.log('error from createRecipe',error);
-        throw new Error(error.message || "internal Server Error")
-        
+    }catch (error: any) {
+        console.log(error);
+        throw new Error(error.message || 'Internal server error');
     }
+redirect(`recipes/${recipe.recipeId}`)
+
+
 }
+

@@ -1,9 +1,12 @@
 'use client'
 
+import { createRecipe } from "@/app/action";
+import { useUser } from "@clerk/nextjs";
 import React, { useState } from "react";
 
 const UpsertForm = () => {
 
+  const {user}=useUser()
     const [ingredients,setIngredients]=useState([''])
     const [steps,setSteps]=useState([''])
 
@@ -41,12 +44,12 @@ const handleDeleteStep=(index:number)=>{
     setSteps(newStep)
 }
 
-
+const  createRecipeWithBind=createRecipe.bind(null,ingredients,steps,user?.id as string)
 
 
 
   return (
-    <form className="space-y-6" action="">
+    <form className="space-y-6" action={createRecipeWithBind}>
 
       <div>
         <label className="block text-gray-700 font-medium mb-1" htmlFor="">
