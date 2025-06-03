@@ -1,6 +1,7 @@
 'use client'
 
 import { createRecipe } from "@/app/action";
+import { CATEGORY } from "@/app/constants/recipe.constants";
 import { useUser } from "@clerk/nextjs";
 import React, { useState } from "react";
 
@@ -49,7 +50,7 @@ const  createRecipeWithBind=createRecipe.bind(null,ingredients,steps,user?.id as
 
 
   return (
-    <form className="space-y-6" action={createRecipeWithBind}>
+    <form className="space-y-6" action={createRecipeWithBind} >
 
       <div>
         <label className="block text-gray-700 font-medium mb-1" htmlFor="">
@@ -75,8 +76,9 @@ const  createRecipeWithBind=createRecipe.bind(null,ingredients,steps,user?.id as
         >
 
         <option >Select Category</option>
- <option >BreakFast</option>
-  <option >Snacks</option>
+        {CATEGORY.map((category:string)=>(
+          <option value={category} key={category}>{category}</option>
+        ))}
 
 
         </select>

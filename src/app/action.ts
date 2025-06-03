@@ -53,10 +53,16 @@ export async function createRecipe(
 
 
 
-    }catch (error: any) {
+   }catch (error: unknown) {
+    if (error instanceof Error) {
         console.log(error);
         throw new Error(error.message || 'Internal server error');
+    } else {
+        console.log('Unknown error:', error);
+        throw new Error('Internal server error');
     }
+}
+
 redirect(`recipes/${recipe.recipeId}`)
 
 
