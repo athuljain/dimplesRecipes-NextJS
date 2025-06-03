@@ -5,19 +5,15 @@ const Header=()=>{
     return(
              <header className='bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 shadow-md py-4'>
             <div className='container mx-auto flex justify-between items-center px-4'>
-                <Link  href='/'>
-                    <a className='text-3xl font-bold text-white'>
-                        Foodies - The Recipe Book
-                    </a>
-                </Link>
+              <Link href='/' className='text-3xl font-bold text-white'>
+          Foodies - The Recipe Book
+        </Link>
                 <nav>
                     <ul className='flex space-x-8 items-center'>
                         <li>
-                            <Link href='/recipes/create-edit' >
-                                <a className='items-center text-white hover:text-gray-300 transition-colors duration-300'>
-                                    New Recipe
-                                </a>
-                            </Link>
+                           <Link href='/recipes/create-edit' className='items-center text-white hover:text-gray-300 transition-colors duration-300'>
+    New Recipe
+</Link>
                         </li>
                         <li className='relative' >
                             <button
@@ -53,24 +49,22 @@ const Header=()=>{
                                     className={`absolute top-full left-0 bg-white shadow-lg py-2 rounded-md mt-1 `}
                                 >
                                     <li className='px-4 py-2'>
-                                        <Link
-                                            href={`/recipes/my/all`}
-                                           
-                                        >
-                                            <a className='text-gray-800 hover:text-blue-500 transition-colors duration-300'>
-                                                Mine
-                                            </a>
-                                        </Link>
+                                    <Link
+  href="/recipes/my/all"
+  className="text-gray-800 hover:text-blue-500 transition-colors duration-300"
+>
+  Mine
+</Link>
+
                                     </li>
                                     <li className='px-4 py-2'>
-                                        <Link
-                                            href={`/recipes/my/saved`}
-                                           
-                                        >
-                                            <a className='text-gray-800 hover:text-blue-500 transition-colors duration-300'>
-                                                Saved
-                                            </a>
-                                        </Link>
+                                     <Link
+  href="/recipes/my/saved"
+  className="text-gray-800 hover:text-blue-500 transition-colors duration-300"
+>
+  Saved
+</Link>
+
                                     </li>
                                 </ul>
                             </li>
